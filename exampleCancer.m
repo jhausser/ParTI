@@ -1,0 +1,79 @@
+%% Example of the PAA method on gene expression in Cancer
+% This script an example of how to analyze gene expression data with the PAA method.
+% It can be used as a template to analyze other datasets.
+
+% Load the data into Matlab from a comma separated value (CSV) file
+% The file is a purely numerical matrix, with patients as rows and genes as
+% columns
+geneExpression = dlmread('Data/Cancer/Cancer_expression.csv', ',');
+% The file is formated as samples (i.e. patients) x genes. 
+% We load gene names.
+geneNames = importdata('Data/Cancer/Cancer_geneNames.list');
+
+%% We import the sample attributes, i.e. the clinical data on patients
+% These come in two kinds: 
+% - discrete attributes, i.e. categorical data (citizenship, gender, cancer progression grade, ...)
+% - continuous attributes, i.e. numerical data (weight, age, tumor volume, ...)
+% We start by loading discrete attributes.
+[discrAttrNames, discrAttr] = ...
+    read_enriched_csv('Data/Cancer/Cancer_discreteClinicalData.tsv', char(9));
+%where discrAttr is a matrix of 2106 patients x 25 attributes. The names of
+%the attributes are stored in discrAttrNames.
+
+% We will not actually consider all discrete patient attributes included in
+% the dataset, only a subset of most informative attributes.
+% We therefore load a file with a vector 'cols' containing the indices of 
+% the attributes to be considered in the study:
+load Data/Cancer/Cancer_discreteClinicalDataSelection.mat;
+% We now keep only these attributes and discard all the others:
+discrAttrNames = discrAttrNames(:,cols);
+discrAttr = discrAttr(:,cols);
+
+% In this dataset, we did not consider continous attributes. If we had, we
+% would load them now.
+contAttrNames = [];
+contAttr = [];
+% [contAttrNames, contAttr] = ...
+%    read_enriched_csv('Data/Cancer/Cancer_continuousClinicalData.tsv', char(9));
+
+%% We expand the sample attributes by computing changes in GO category expression
+% This section is optional. It makes it possible to determine broad gene 
+% expression categories that are over-expressed in the vicinity of 
+% archetypes. This is helpful to characterize the archetypes.
+[GOExpression,GONames,~,GOcat2Genes] = MakeGOMatrix(geneExpression, geneNames, ...
+                {'MSigDB/c2.cp.v4.0.symbols.gmt', 'MSigDB/c5.all.v4.0.symbols.gmt'}, ...
+                100);
+% GOExpression is a matrix of 2106 patients x 162 GO categories, and
+% GONames contains the name of the GO categories.
+% GOcat2Genes is a boolean matrix of genes x GO categories which
+% indicates, for each category, which genes were used to compute it.
+% In the next line, we expand this matrix so that it has as many columns as
+% the number of continuous features (clinical + GO). Because clinical
+% features are typically not directly based on specific genes, we add
+% zeroes in the corresponding columns:
+GOcat2Genes=[zeros(size(GOcat2Genes,1),size(contAttr,2)),GOcat2Genes];
+% and we expand the continuous clinical features with GO-based continuous
+% features:
+contAttrNames = [contAttrNames, GONames];
+contAttr = [contAttr, GOExpression];
+
+
+%% Finally, we substitute underscores '_' in variable names with spaces ' ' 
+% to prevent the characters following underscores from appearing in indice
+% position.
+discrAttrNames = regexprep(discrAttrNames, '_', ' ');
+contAttrNames = regexprep(contAttrNames, '_', ' ');
+
+%% We are now ready to run the Pareto Archetype Analysis
+% We use the Sisal algorithm (1), with up to 8 dimensions. We provide the
+% discrete patient attributes, and ask PAA to preliminary booleanize these
+% attributes (0). We also pass continuous patient features. We pass a boolean 
+% matrix specifiying which genes each continuous feature is baesd on (to be used
+% in the leave-one-out procedure). 
+% We specify that the enrichment analysis will be performed with a bin size 
+% of 5%. Finally, the output of the the analysis will be stored in an
+% Comma-Separated-Value text file, under the name 'Cancer_enrichmentAnalysis_*.csv'.
+[arc, arcOrig, pc] = PAAM_lite(geneExpression, 1, 8, discrAttrNames, ...
+    discrAttr, 0, contAttrNames, contAttr, 0.05, 'Cancer_enrichmentAnalysis');
+[arc, errs, arcOrig, pval, pc] = PAAM(geneExpression, 1, 8, discrAttrNames, ...
+    discrAttr, 0, contAttrNames, contAttr, GOcat2Genes, 0.05, 'Cancer_enrichmentAnalysis');

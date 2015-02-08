@@ -1,0 +1,90 @@
+tissue name	tissue type
+fibroblast	other (homogenous)
+adipose_brown	other (homogenous)
+adipose_white	other (homogenous)
+adrenal_gland	secretory
+amygdala	neural
+bone_marrow_proBcell	hematopoietic cells & progenitors
+B_cells_marginal_zone	hematopoietic cells & progenitors
+bladder	other (heterogenous)
+bone	other (heterogenous)
+bone_marrow	other (heterogenous)
+myoblast	other (homogenous)
+pluripotent_mesenchymal	stem cells & progenitors
+cerebellum	neural
+cerebral_cortex	neural
+cerebral_cortex_prefrontal	neural
+ciliary_bodies	other (heterogenous)
+common_myeloid_progenitor	hematopoietic cells & progenitors
+cornea	other (heterogenous)
+dendritic_cells_lymphoid_CD8aPlus	hematopoietic cells & progenitors
+dendritic_cells_myeloid_CD8aMinus	hematopoietic cells & progenitors
+dendritic_plasmacytoid_B220plus	hematopoietic cells & progenitors
+dorsal_root_ganglia	neural
+dorsal_striatum	neural
+embryonic_stem_line	stem cells & progenitors
+epidermis	secretory
+eyecup	other (heterogenous)
+follicular_B_cells	hematopoietic cells & progenitors
+granulo_mono_progenitor	hematopoietic cells & progenitors
+granulocytes_mac1plus_gr1plus	hematopoietic cells & progenitors
+heart	other (heterogenous)
+hippocampus	neural
+hypothalamus	neural
+intestine_large	other (heterogenous)
+intestine_small	other (heterogenous)
+iris	other (heterogenous)
+kidney	other (heterogenous)
+lacrimal_gland	secretory
+lens	other (heterogenous)
+liver	other (heterogenous)
+lung	other (heterogenous)
+lymph_nodes	other (heterogenous)
+macrophage_bone_marrow_0hr	macrophages & microglia
+macrophage_bone_marrow_24h_LPS	macrophages & microglia
+macrophage_bone_marrow_2hr_LPS	macrophages & microglia
+macrophage_bone_marrow_6hr_LPS	macrophages & microglia
+macrophage_peri_LPS_thio_0hrs	macrophages & microglia
+macrophage_peri_LPS_thio_1hrs	macrophages & microglia
+macrophage_peri_LPS_thio_7hrs	macrophages & microglia
+mammary_gland_lact	secretory
+mammary_gland_non_lactating	secretory
+mast_cells	hematopoietic cells & progenitors
+mast_cells_IgE	hematopoietic cells & progenitors
+mast_cells_IgEplusAntigen_1hr	hematopoietic cells & progenitors
+mast_cells_IgEplusAntigen_6hr	hematopoietic cells & progenitors
+mega_erythrocyte_progenitor	hematopoietic cells & progenitors
+microglia	macrophages & microglia
+kidney_collecting.duct	other (homogenous)
+pancreas_betaCells	secretory
+neuroblast	stem cells & progenitors
+NK_cells	hematopoietic cells & progenitors
+nucleus_accumbens	neural
+olfactory_bulb	neural
+osteoblast_day14	other (homogenous)
+osteoblast_day21	other (homogenous)
+osteoblast_day5	other (homogenous)
+osteoclasts	hematopoietic cells & progenitors
+ovary	other (heterogenous)
+pancreas	secretory
+pituitary	secretory
+placenta	other (heterogenous)
+prostate	other (heterogenous)
+macrophage_leukemia	macrophages & microglia
+retina	other (heterogenous)
+retinal_pigment_epithelium	other (heterogenous)
+salivary_gland	secretory
+skeletal_muscle	other (heterogenous)
+spinal_cord	neural
+spleen	other (heterogenous)
+hematopoetic_stemCells	stem cells & progenitors
+stomach	other (heterogenous)
+T_cells_CD4plus	hematopoietic cells & progenitors
+T_cells_CD8plus	hematopoietic cells & progenitors
+T_cells_foxP3plus	hematopoietic cells & progenitors
+testis	other (heterogenous)
+thymocyte_DP_CD4plus_CD8plus	hematopoietic cells & progenitors
+thymocyte_SP_CD4plus	hematopoietic cells & progenitors
+thymocyte_SP_CD8plus	hematopoietic cells & progenitors
+umbilical_cord	other (heterogenous)
+uterus	other (heterogenous)
